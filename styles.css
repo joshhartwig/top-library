@@ -1,7 +1,8 @@
+/*https://colorhunt.co/palette/ffe6e6f2d1d1daeaf1c6dce4*/
 :root{
-    --sidebar-bgcolor: red;
-    --main-bgcolor: white;
-    --card-bgcolor: grey;
+    --sidebar-bgcolor: #F2D1D1;
+    --main-bgcolor: #FFE6E6;
+    --card-bgcolor: #DAEAF1;
     font-family: 'Joan', serif;
     font-size: 16px;
 }
@@ -15,15 +16,30 @@ img {
     height: auto;
 }
 
+/* --- sidebar ---- */
+
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3em 0em 0em 0em;
     background-color: var(--sidebar-bgcolor);
     height: 100vh;
     width: 20%;
 }
 
+.sidebar-title {
+    font-size: xx-large;
+}
+
+
+
+/* --- shelf ---- */
 .shelf {
+    background-color: var(--main-bgcolor);
     height: 100vh;
     width: 70%;
+    margin: 3rem 0rem 5rem 5rem;
     display: grid;
     grid-gap: 20px;
     grid-template-areas: 

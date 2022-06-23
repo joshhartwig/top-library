@@ -19,6 +19,11 @@ function seedBooks() {
     books.push(new Book('May Whittendof', 'Royalty', 200, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
     books.push(new Book('Tappy Tons', 'I like beef', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
     books.push(new Book('Amelia Airheart', 'Where am I?', 444, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Yess Tess', 'Arms no feet', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Yafl mouse', 'Tom house', 400, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Ars T', 'Software D', 200, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Yonah Yons', 'I like beef', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Amelia Airheart', 'Where am I?', 444, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
 }
 function updateShelf() {
     books.forEach(e => {
