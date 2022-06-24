@@ -71,8 +71,15 @@ img {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    margin: 25% auto;
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
     border: 1px solid #888;
-    width: 80%;
+    width: fit-content;
+}
+
+[class^='grid-item'] { 
+    padding-bottom: 10px;
 }
