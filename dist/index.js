@@ -13,17 +13,36 @@ class Book {
 }
 let books = [];
 const display = document.getElementById('shelf');
+const modal = document.getElementById('modal');
+const btn = document.getElementById('create-book');
+function popModal() {
+    if (modal) {
+        modal.style.display = "block";
+    }
+}
+function closeModal() {
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
+window.onclick = function (event) {
+    if (event.target == modal) {
+        if (modal) {
+            modal.style.display = "none";
+        }
+    }
+};
 function seedBooks() {
-    books.push(new Book('Jon Crook', 'Where the Wild Grows', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Jon Crook', 'Where the Wild Thing Grows', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
     books.push(new Book('Peter Dumperdorf', 'Animal House', 400, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
     books.push(new Book('May Whittendof', 'Royalty', 200, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Tappy Tons', 'I like beef', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Jon Tapper', 'I like beef?', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
     books.push(new Book('Amelia Airheart', 'Where am I?', 444, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
     books.push(new Book('Yess Tess', 'Arms no feet', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Yafl mouse', 'Tom house', 400, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Ars T', 'Software D', 200, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Yonah Yons', 'I like beef', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Amelia Airheart', 'Where am I?', 444, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Peter the Great', 'I am great!', 400, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Wanda Salanda', 'Lets write backwards!', 200, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Yonah Yons', 'Why cats?', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Ariana Grande', 'Im famous', 444, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
 }
 function updateShelf() {
     books.forEach(e => {
@@ -46,5 +65,25 @@ function updateShelf() {
         display === null || display === void 0 ? void 0 : display.appendChild(card);
     });
 }
+function UpdateStats() {
+    const book_count = document.getElementById('stat-book-count');
+    const book_authors = document.getElementById('stat-book-authors');
+    const pages_read = document.getElementById('stat-book-pagesread');
+    const books_read = document.getElementById('stat-book-booksread');
+    const unread_books = document.getElementById('stat-book-unreadbooks');
+    let count = books.length;
+    let authors = 0;
+    let pages = 0;
+    let booksread = 0;
+    let unreadbooks = 0;
+    (book_count === null || book_count === void 0 ? void 0 : book_count.innerText) === count.toString();
+}
+function AddBooks(title, author, pageCount, hasRead, artLink) {
+    books.push(new Book(title, author, parseInt(pageCount), hasRead, artLink));
+    updateShelf();
+    UpdateStats();
+    closeModal();
+}
 seedBooks();
 updateShelf();
+UpdateStats();

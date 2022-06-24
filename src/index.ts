@@ -20,23 +20,47 @@ class Book {
 
 let books: Book[] = [];
 const display = document.getElementById('shelf');
+const modal = document.getElementById('modal');
+const btn = document.getElementById('create-book');
 
+// pop the modal dialog
+function popModal() : void {
+    if(modal){
+        modal.style.display = "block";
+    }
+}
+
+// close modal when user clicks x
+function closeModal() : void {
+    if(modal){
+        modal.style.display = "none";
+    }
+}
+
+// if user clicks outside of modal close it
+window.onclick = function(event){
+    if(event.target == modal){
+        if(modal){
+            modal.style.display = "none";
+        }
+    }
+}
+
+// seed the array with a few books
 function seedBooks(): void {
-    books.push(new Book('Jon Crook','Where the Wild Grows',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Jon Crook','Where the Wild Thing Grows',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
     books.push(new Book('Peter Dumperdorf','Animal House',400,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
     books.push(new Book('May Whittendof','Royalty',200,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Tappy Tons','I like beef',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Jon Tapper','I like beef?',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
     books.push(new Book('Amelia Airheart','Where am I?',444,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
     books.push(new Book('Yess Tess','Arms no feet',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Yafl mouse','Tom house',400,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Ars T','Software D',200,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Yonah Yons','I like beef',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Amelia Airheart','Where am I?',444,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Peter the Great','I am great!',400,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Wanda Salanda','Lets write backwards!',200,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Yonah Yons','Why cats?',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    books.push(new Book('Ariana Grande','Im famous',444,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
 }
 
 // update the bookshelf with all the books
-// TODO: Create a card for each book
-// TODO: make sure to assign each item a grid-area
 function updateShelf(): void {
     books.forEach(e => {
         //create card container
@@ -67,6 +91,32 @@ function updateShelf(): void {
     });
 }
 
+// update stats on sidebar
+function UpdateStats(): void{
+    const book_count = document.getElementById('stat-book-count');
+    const book_authors = document.getElementById('stat-book-authors');
+    const pages_read = document.getElementById('stat-book-pagesread');
+    const books_read = document.getElementById('stat-book-booksread');
+    const unread_books = document.getElementById('stat-book-unreadbooks');
+
+    let count: number = books.length;
+    let authors: number = 0;
+    let pages: number = 0;
+    let booksread: number = 0;
+    let unreadbooks: number = 0;
+
+    book_count?.innerText === count.toString();
+}
+
+// add book from modal
+function AddBooks(title:string, author:string, pageCount:string, hasRead:boolean, artLink:string): void{
+    books.push(new Book(title, author, parseInt(pageCount), hasRead, artLink));
+    updateShelf();
+    UpdateStats();
+    closeModal();
+}
+
 seedBooks();
 updateShelf();
+UpdateStats();
 
