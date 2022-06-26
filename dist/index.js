@@ -1,4 +1,8 @@
 "use strict";
+const DISPLAY = document.getElementById('shelf');
+const MODAL = document.getElementById('modal');
+const BUTTON = document.getElementById('create-book');
+let books = [];
 class Book {
     constructor(author, title, pageCount, hasRead, art) {
         this.author = author;
@@ -11,38 +15,39 @@ class Book {
         console.log(`${this.author}, ${this.art}, ${this.title}, ${this.hasRead}, ${this.pageCount}`);
     }
 }
-let books = [];
-const display = document.getElementById('shelf');
-const modal = document.getElementById('modal');
-const btn = document.getElementById('create-book');
+if (localStorage.getItem('books') === null) {
+    seedBooks();
+    localStorage.setItem('books', JSON.stringify(books));
+}
+else {
+    let tmp = localStorage.getItem('books');
+    books = JSON.parse(tmp);
+    console.log('retrieved object', JSON.parse(tmp));
+}
 function popModal() {
-    if (modal) {
-        modal.style.display = "block";
+    if (MODAL) {
+        MODAL.style.display = "block";
     }
 }
 function closeModal() {
-    if (modal) {
-        modal.style.display = "none";
+    if (MODAL) {
+        MODAL.style.display = "none";
     }
 }
 window.onclick = function (event) {
-    if (event.target == modal) {
-        if (modal) {
-            modal.style.display = "none";
+    if (event.target == MODAL) {
+        if (MODAL) {
+            MODAL.style.display = "none";
         }
     }
 };
 function seedBooks() {
-    books.push(new Book('Jon Crook', 'Where the Wild Thing Grows', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Peter Dumperdorf', 'Animal House', 400, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('May Whittendof', 'Royalty', 200, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Jon Tapper', 'I like beef?', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Amelia Airheart', 'Where am I?', 444, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Yess Tess', 'Arms no feet', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Peter the Great', 'I am great!', 400, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Wanda Salanda', 'Lets write backwards!', 200, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Yonah Yons', 'Why cats?', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Ariana Grande', 'Im famous', 444, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    if (books.length === 0) {
+        books.push(new Book('Jon Crook', 'Where the Wild Thing Grows', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+        books.push(new Book('Peter Dumperdorf', 'Animal House', 400, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+        books.push(new Book('May Whittendof', 'Royalty', 200, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+        books.push(new Book('Jon Tapper', 'I like beef?', 183, false, 'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    }
 }
 function updateShelf() {
     books.forEach(e => {
@@ -62,7 +67,7 @@ function updateShelf() {
         info_cont.classList.add('card-info');
         card.appendChild(img_cont);
         card.appendChild(info_cont);
-        display === null || display === void 0 ? void 0 : display.appendChild(card);
+        DISPLAY === null || DISPLAY === void 0 ? void 0 : DISPLAY.appendChild(card);
     });
 }
 function UpdateStats() {
@@ -84,10 +89,10 @@ function AddBooks(title, author, pageCount, hasRead, artLink) {
     const book_pages = document.getElementById('book-pages');
     const book_link = document.getElementById('book-imagelink');
     books.push(new Book(book_title.value, book_author.value, parseInt(book_pages.value), false, book_link.value));
+    localStorage.setItem('books', JSON.stringify(books));
     updateShelf();
     UpdateStats();
     closeModal();
 }
-seedBooks();
 updateShelf();
 UpdateStats();

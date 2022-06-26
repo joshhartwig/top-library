@@ -1,3 +1,10 @@
+// TODO: Kinda works. Display is funky. Prob should nuke local storage prior to saving
+const DISPLAY = document.getElementById('shelf');
+const MODAL = document.getElementById('modal');
+const BUTTON = document.getElementById('create-book');
+
+let books: Book[] = [];
+
 class Book {
     author: string;
     title: string;
@@ -18,46 +25,49 @@ class Book {
     }
 }
 
-let books: Book[] = [];
-const display = document.getElementById('shelf');
-const modal = document.getElementById('modal');
-const btn = document.getElementById('create-book');
+// if local storage has no books, create a few
+if(localStorage.getItem('books') === null){
+    seedBooks();
+    localStorage.setItem('books',JSON.stringify(books));
+} else {
+    let tmp: any = localStorage.getItem('books');
+    books = JSON.parse(tmp);
+    console.log('retrieved object',JSON.parse(tmp));
+}
+
+
 
 // pop the modal dialog
 function popModal() : void {
-    if(modal){
-        modal.style.display = "block";
+    if(MODAL){
+        MODAL.style.display = "block";
     }
 }
 
 // close modal when user clicks x
 function closeModal() : void {
-    if(modal){
-        modal.style.display = "none";
+    if(MODAL){
+        MODAL.style.display = "none";
     }
 }
 
 // if user clicks outside of modal close it
 window.onclick = function(event){
-    if(event.target == modal){
-        if(modal){
-            modal.style.display = "none";
+    if(event.target == MODAL){
+        if(MODAL){
+            MODAL.style.display = "none";
         }
     }
 }
 
 // seed the array with a few books
 function seedBooks(): void {
-    books.push(new Book('Jon Crook','Where the Wild Thing Grows',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Peter Dumperdorf','Animal House',400,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('May Whittendof','Royalty',200,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Jon Tapper','I like beef?',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Amelia Airheart','Where am I?',444,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Yess Tess','Arms no feet',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Peter the Great','I am great!',400,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Wanda Salanda','Lets write backwards!',200,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Yonah Yons','Why cats?',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
-    books.push(new Book('Ariana Grande','Im famous',444,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    if (books.length === 0) {
+        books.push(new Book('Jon Crook','Where the Wild Thing Grows',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+        books.push(new Book('Peter Dumperdorf','Animal House',400,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+        books.push(new Book('May Whittendof','Royalty',200,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+        books.push(new Book('Jon Tapper','I like beef?',183,false,'https://images-na.ssl-images-amazon.com/images/I/51565LIJlSL._SX368_BO1,204,203,200_.jpg'));
+    }  
 }
 
 // update the bookshelf with all the books
@@ -87,7 +97,7 @@ function updateShelf(): void {
         card.appendChild(info_cont);
 
         //append cards to container
-        display?.appendChild(card);
+        DISPLAY?.appendChild(card);
     });
 }
 
@@ -116,13 +126,13 @@ function AddBooks(title:string, author:string, pageCount:string, hasRead:boolean
     const book_link = document.getElementById('book-imagelink') as HTMLInputElement;
 
     books.push(new Book(book_title.value, book_author.value, parseInt(book_pages.value), false, book_link.value));
-
+    localStorage.setItem('books',JSON.stringify(books));
     updateShelf();
     UpdateStats();
     closeModal();
 }
 
-seedBooks();
+
 updateShelf();
 UpdateStats();
 
