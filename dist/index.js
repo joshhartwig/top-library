@@ -79,7 +79,11 @@ function UpdateStats() {
     (book_count === null || book_count === void 0 ? void 0 : book_count.innerText) === count.toString();
 }
 function AddBooks(title, author, pageCount, hasRead, artLink) {
-    books.push(new Book(title, author, parseInt(pageCount), hasRead, artLink));
+    const book_title = document.getElementById('book-title');
+    const book_author = document.getElementById('book-author');
+    const book_pages = document.getElementById('book-pages');
+    const book_link = document.getElementById('book-imagelink');
+    books.push(new Book(book_title.value, book_author.value, parseInt(book_pages.value), false, book_link.value));
     updateShelf();
     UpdateStats();
     closeModal();

@@ -110,7 +110,13 @@ function UpdateStats(): void{
 
 // add book from modal
 function AddBooks(title:string, author:string, pageCount:string, hasRead:boolean, artLink:string): void{
-    books.push(new Book(title, author, parseInt(pageCount), hasRead, artLink));
+    const book_title = document.getElementById('book-title') as HTMLInputElement;
+    const book_author = document.getElementById('book-author') as HTMLInputElement;
+    const book_pages = document.getElementById('book-pages') as HTMLInputElement;
+    const book_link = document.getElementById('book-imagelink') as HTMLInputElement;
+
+    books.push(new Book(book_title.value, book_author.value, parseInt(book_pages.value), false, book_link.value));
+
     updateShelf();
     UpdateStats();
     closeModal();
