@@ -50,9 +50,11 @@ function seedBooks() {
     }
 }
 function updateShelf() {
+    let counter = 0;
     books.forEach(e => {
         let card = document.createElement('div');
         card.classList.add('card');
+        card.setAttribute('bookId', `${counter}`);
         let img_cont = document.createElement('div');
         img_cont.innerHTML = `<img src="${e.art}" alt="album art">`;
         img_cont.classList.add(`card-image`);
@@ -63,11 +65,13 @@ function updateShelf() {
             <li>${e.author}</li>
             <li>${e.pageCount}</li>
             <li>${e.hasRead}</li>
-            </ul>`;
+            </ul>
+            <button class='card-info-btn' onclick='deleteBook(${counter})'>Delete Book</button>`;
         info_cont.classList.add('card-info');
         card.appendChild(img_cont);
         card.appendChild(info_cont);
         DISPLAY === null || DISPLAY === void 0 ? void 0 : DISPLAY.appendChild(card);
+        counter++;
     });
 }
 function UpdateStats() {
@@ -83,7 +87,7 @@ function UpdateStats() {
     let unreadbooks = 0;
     (book_count === null || book_count === void 0 ? void 0 : book_count.innerText) === count.toString();
 }
-function AddBooks(title, author, pageCount, hasRead, artLink) {
+function AddBooks() {
     const book_title = document.getElementById('book-title');
     const book_author = document.getElementById('book-author');
     const book_pages = document.getElementById('book-pages');
@@ -93,6 +97,11 @@ function AddBooks(title, author, pageCount, hasRead, artLink) {
     updateShelf();
     UpdateStats();
     closeModal();
+}
+function deleteBook(id) {
+    books.splice(id, 1);
+    updateShelf();
+    UpdateStats();
 }
 updateShelf();
 UpdateStats();

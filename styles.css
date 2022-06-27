@@ -1,8 +1,8 @@
 /*https://colorhunt.co/palette/ffe6e6f2d1d1daeaf1c6dce4*/
 :root{
-    --sidebar-bgcolor: #F2D1D1;
-    --main-bgcolor: #FFE6E6;
-    --card-bgcolor: #DAEAF1;
+    --sidebar-bgcolor: #e4e4e7;
+    --main-bgcolor: #71717a;
+    --card-bgcolor: #fafafa;
     font-family: 'Joan', serif;
     font-size: 16px;
 }
@@ -36,13 +36,22 @@ img {
 .shelf {
     background-color: var(--main-bgcolor);
     height: 100vh;
-    width: 70%;
-    margin: 3rem 0rem 5rem 5rem;
+    width: 100%;
+    padding: 3rem 0rem 5rem 5rem;
     display: grid;
     grid-gap: 20px;
     grid-template-areas: 
     "card card card card card";
     grid-template-columns: repeat(5,1fr);
+    grid-auto-rows:max-content;
+}
+
+.card-image {
+    
+}
+
+.card-info {
+    padding: 1em 1em 1em 1em;
 }
 
 .card {

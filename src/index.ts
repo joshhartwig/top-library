@@ -1,4 +1,7 @@
-// TODO: Kinda works. Display is funky. Prob should nuke local storage prior to saving
+// TODO: Book removal button on each card
+// TODO: assign each card a data-attribute that ties to the book
+// TODO: Do that by getting length or arr and adding one during new push to arr
+// TODO: Create a button that removes that book from the array
 const DISPLAY = document.getElementById('shelf');
 const MODAL = document.getElementById('modal');
 const BUTTON = document.getElementById('create-book');
@@ -72,10 +75,15 @@ function seedBooks(): void {
 
 // update the bookshelf with all the books
 function updateShelf(): void {
+    // using a counter to add a data element to allow for deleting on card
+    let counter = 0; 
+    
+    // loop through each book and create a card with associated information
     books.forEach(e => {
         //create card container
         let card = document.createElement('div');
         card.classList.add('card');
+        card.setAttribute('bookId',`${counter}`);
         
         //create image container
         let img_cont = document.createElement('div');
@@ -89,7 +97,8 @@ function updateShelf(): void {
             <li>${e.author}</li>
             <li>${e.pageCount}</li>
             <li>${e.hasRead}</li>
-            </ul>`
+            </ul>
+            <button class='card-info-btn' onclick='deleteBook(${counter})'>Delete Book</button>`
         info_cont.classList.add('card-info');
 
         //append everythign to card
@@ -98,6 +107,9 @@ function updateShelf(): void {
 
         //append cards to container
         DISPLAY?.appendChild(card);
+
+        //increment counter
+        counter++;
     });
 }
 
@@ -119,7 +131,7 @@ function UpdateStats(): void{
 }
 
 // add book from modal
-function AddBooks(title:string, author:string, pageCount:string, hasRead:boolean, artLink:string): void{
+function AddBooks(): void{
     const book_title = document.getElementById('book-title') as HTMLInputElement;
     const book_author = document.getElementById('book-author') as HTMLInputElement;
     const book_pages = document.getElementById('book-pages') as HTMLInputElement;
@@ -130,6 +142,13 @@ function AddBooks(title:string, author:string, pageCount:string, hasRead:boolean
     updateShelf();
     UpdateStats();
     closeModal();
+}
+
+// delete book
+function deleteBook(id:number) :void {
+    books.splice(id,1);
+    updateShelf();
+    UpdateStats();
 }
 
 
