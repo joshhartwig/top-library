@@ -51,6 +51,9 @@ function seedBooks() {
 }
 function updateShelf() {
     let counter = 0;
+    if (DISPLAY) {
+        DISPLAY.innerHTML = '';
+    }
     books.forEach(e => {
         let card = document.createElement('div');
         card.classList.add('card');

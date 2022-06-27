@@ -1,7 +1,4 @@
-// TODO: Book removal button on each card
-// TODO: assign each card a data-attribute that ties to the book
-// TODO: Do that by getting length or arr and adding one during new push to arr
-// TODO: Create a button that removes that book from the array
+// TODO: clean up the remaining css styles
 const DISPLAY = document.getElementById('shelf');
 const MODAL = document.getElementById('modal');
 const BUTTON = document.getElementById('create-book');
@@ -77,6 +74,11 @@ function seedBooks(): void {
 function updateShelf(): void {
     // using a counter to add a data element to allow for deleting on card
     let counter = 0; 
+
+    //if DISPLAY element has content, clear it.
+    if(DISPLAY){
+        DISPLAY.innerHTML = '';
+    }
     
     // loop through each book and create a card with associated information
     books.forEach(e => {
