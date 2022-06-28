@@ -10,6 +10,7 @@
 html, body {
     height: 100%;
     overflow: auto;
+    background-color: var(--sidebar-bgcolor);
   }
 
 body {
@@ -39,22 +40,32 @@ img {
 
 .sidebar-info {
     width: 60%;
+    font-size: large;
 }
 
 .signature {
     display: flex;
     align-items: center;
+    margin-top: auto;
+    margin-bottom: 30%;
+    margin-left: 1em;
 }
 
 .signature-text {
     font-family: 'Smooch', cursive;
     font-size: 1.5em;
-    margin-left: .5em;
+    /*margin-left: .5em;*/
 }
 
 .signature-image {
-    width:15%;
+    width:20%;
     height: auto;
+}
+
+.signature-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline;
 }
 
 .title {
@@ -64,6 +75,10 @@ img {
 
 .sidebar-title{
     margin-bottom: .5em;
+}
+
+.manage {
+    margin-top: 5em;
 }
 
 
